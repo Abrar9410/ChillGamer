@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import emptyUser from "../assets/user.png";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { Tooltip } from "react-tooltip";
 
 
 const Navbar = () => {
@@ -62,7 +63,11 @@ const Navbar = () => {
                 {
                     location.pathname === "/login" || location.pathname === "/register" ||
                     <div className="flex max-[270px]:flex-col justify-end items-center max-[290px]:gap-1 gap-2">
-                        {user && <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border"><img className="w-full h-full rounded-full" src={user.photoURL} alt="user_IMG" /></div>}
+                        {user && 
+                        <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border">
+                            <img className="w-full h-full rounded-full" src={user.photoURL} alt="user_IMG" data-tooltip-id="name-tooltip" data-tooltip-content={user.displayName}/>
+                            <Tooltip id="name-tooltip"/>
+                        </div>}
                         {
                             user ?
                                 <button onClick={handleLogOut} className="outline-none max-[350px]:p-1 px-3 py-2 rounded-lg text-xs sm:text-sm md:text-base font-semibold bg-white text-[#575757] hover:scale-105 shadow-md">Log Out</button>

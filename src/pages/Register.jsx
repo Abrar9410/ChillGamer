@@ -48,6 +48,11 @@ const Register = () => {
         loginWithGoogle()
             .then(result => {
                 setUser(result.user);
+                navigate("/");
+                toast.success("Registration Successful!!!", {
+                    position: "top-center"
+                });
+                setLoading(false);
             })
             .catch(error => setErrorMessage(error.message));
     }
