@@ -37,9 +37,10 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><NavLink to="/">Home</NavLink></li>
-                            <li><NavLink to="/brands">Brands</NavLink></li>
-                            <li><NavLink to="/about-dev">About Dev</NavLink></li>
-                            {user && <li><NavLink to="/user-profile">My Profile</NavLink></li>}
+                            <li><NavLink to="/allReviews">All Reviews</NavLink></li>
+                            {/*user && */<li><NavLink to="/addReview">Add Review</NavLink></li>}
+                            {/*user && */<li><NavLink to="/myReviews">My Reviews</NavLink></li>}
+                            {/*user && */<li><NavLink to="/watchList">Watchlist</NavLink></li>}
                         </ul>
                     </div>
                     <Link to="/" className="flex max-[305px]:flex-col max-[305px]:gap-0 items-center gap-2">
@@ -52,9 +53,10 @@ const Navbar = () => {
                         <div className="w-max bg-white rounded-full"><img src={emptyUser} alt="empty_user" /></div> :
                         <div className="hidden md:flex justify-center items-center gap-4 text-white">
                             <NavLink to="/" className={({isActive})=>isActive? "underline": "hover:scale-105"}>Home</NavLink>
-                            <NavLink to="/brands" className={({isActive})=>isActive? "underline": "hover:scale-105"}>Brands</NavLink>
-                            <NavLink to="/about-dev" className={({isActive})=>isActive? "underline": "hover:scale-105"}>About Dev</NavLink>
-                            {user && <NavLink to="/user-profile" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>My Profile</NavLink>}
+                            <NavLink to="/allReviews" className={({isActive})=>isActive? "underline": "hover:scale-105"}>All Reviews</NavLink>
+                            {/*user && */<NavLink to="/addReview" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>Add Review</NavLink>}
+                            {/*user && */<NavLink to="/myReviews" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>My Reviews</NavLink>}
+                            {/*user && */<NavLink to="/watchList" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>Watchlist</NavLink>}
                         </div>
                 }
                 {

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const Register = () => {
 
-    const { setUser, setLoading, loginWithGoogle, createAccount, updateUserProfile } = useContext(AuthContext);
+    const { setUser, setLoading, loginWithGoogle, createAccount } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
@@ -34,13 +34,7 @@ const Register = () => {
         createAccount(email, password)
             .then(result => {
                 setUser(result.user);
-                const profile = {
-                    displayName: name,
-                    photoURL: photo
-                }
-                updateUserProfile(profile)
-                    .then(() => navigate("/"))
-                    .catch(error => setErrorMessage(error.message));
+                navigate("/");
                 toast.success("Registration Successful!!!",{
                     position: "top-center"
                 });

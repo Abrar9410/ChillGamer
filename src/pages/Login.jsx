@@ -3,13 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 
 const Login = () => {
 
     const { setUser, loginWithGoogle, loginWithEmailAndPassword, setUserEmail } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
     const emailRef = useRef();
@@ -18,13 +18,14 @@ const Login = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        setErrorMessage('');
         loginWithEmailAndPassword(email, password)
             .then(result => {
                 setUser(result.user);
                 navigate(location?.state ? location.state : "/");
             })
-            .catch(error => setErrorMessage(error.message));
+            .catch(error => toast.error(error.message,{
+                position: "top-center"
+            }));
     }
 
     const handleGoogleLogin = () => {
@@ -34,7 +35,9 @@ const Login = () => {
             setUser(result.user);
             navigate(location?.state ? location.state : "/");
         })
-        .catch(error => setErrorMessage(error.message));
+        .catch(error => toast.error(error.message, {
+            position: "top-center"
+        }));
     }
     const handleShowPassword = e => {
         e.preventDefault();
@@ -71,7 +74,6 @@ const Login = () => {
                         </label>
                     </div>
                     <div className="form-control gap-4 mt-4 items-center">
-                        <p className="text-red-600">{errorMessage}</p>
                         <button className="btn btn-primary w-full">Login</button>
                         <p className="text-center">Don't Have an Account? <Link to="/register" className="text-blue-500">Register</Link></p>
                         <p onClick={handleGoogleLogin} className="cursor-pointer hover:scale-105 py-1 px-2 rounded-lg flex justify-center items-center gap-1 bg-[#575757] text-white w-max">
