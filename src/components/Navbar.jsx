@@ -39,7 +39,7 @@ const Navbar = () => {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><NavLink to="/">Home</NavLink></li>
                             <li><NavLink to="/allReviews">All Reviews</NavLink></li>
-                            {/*user && */<li><NavLink to="/addReview">Add Review</NavLink></li>}
+                            <li><NavLink to="/addReview">Add Review</NavLink></li>
                             {/*user && */<li><NavLink to="/myReviews">My Reviews</NavLink></li>}
                             {/*user && */<li><NavLink to="/watchList">Watchlist</NavLink></li>}
                         </ul>
@@ -55,7 +55,7 @@ const Navbar = () => {
                         <div className="hidden md:flex justify-center items-center gap-4 text-white">
                             <NavLink to="/" className={({isActive})=>isActive? "underline": "hover:scale-105"}>Home</NavLink>
                             <NavLink to="/allReviews" className={({isActive})=>isActive? "underline": "hover:scale-105"}>All Reviews</NavLink>
-                            {/*user && */<NavLink to="/addReview" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>Add Review</NavLink>}
+                            <NavLink to="/addReview" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>Add Review</NavLink>
                             {/*user && */<NavLink to="/myReviews" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>My Reviews</NavLink>}
                             {/*user && */<NavLink to="/watchList" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>Watchlist</NavLink>}
                         </div>
