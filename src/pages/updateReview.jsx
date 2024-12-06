@@ -1,114 +1,6 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../providers/AuthProvider";
-import { toast } from "react-toastify";
 
 
-const AddReview = () => {
-
-    const {user} = useContext(AuthContext);
-    const [errorMessage, setErrorMessage] = useState('');
-
-    const handleAddReview = e => {
-        e.preventDefault();
-        setErrorMessage('');
-        const form = e.target;
-        const title = form.title.value;
-        const coverImg = form.coverImg.value;
-        const description = form.description.value;
-        const genre = form.genre.value;
-        const publishedYear = form.year.value;
-        const rating = parseFloat(form.rating.value);
-        const userName = form.userName.value;
-        const userEmail = form.userEmail.value;
-        if (genre === 'select a genre') {
-            setErrorMessage('Please select a Genre for this game!');
-            return;
-        }
-        if (publishedYear === 'year') {
-            setErrorMessage('Please select the published year of this game!');
-            return;
-        }
-        if (isNaN(rating)) {
-            setErrorMessage('Please provide a rating for this game!');
-            return;
-        }
-        const review = {
-            title,
-            coverImg,
-            description,
-            genre,
-            publishedYear,
-            rating,
-            userName,
-            userEmail
-        };
-        fetch('http://localhost:5000/reviews')
-        .then(res => res.json())
-        .then(data => {
-            const query = data?.filter(review => review.userEmail === userEmail).find(userReview => userReview.title === title);
-            if (query) {
-                setErrorMessage("You already have given a review on this Game! You may want to update your review from 'My Reviews' page");
-            }
-            else {
-                fetch('http://localhost:5000/reviews', {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(review)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.insertedId) {
-                            console.log("success");
-                            fetch('http://localhost:5000/games')
-                                .then(res => res.json())
-                                .then(games => {
-                                    const foundGame = games?.find(game => game.title === review.title);
-
-                                    if (foundGame) {
-                                        const reviewsArray = foundGame.reviews;
-                                        const updatedReviewsArray = [...reviewsArray, review];
-                                        const game = {
-                                            title,
-                                            coverImg,
-                                            reviews: updatedReviewsArray
-                                        };
-                                        fetch(`http://localhost:5000/games/${foundGame._id}`, {
-                                            method: "PATCH",
-                                            headers: { "Content-Type": "application/json" },
-                                            body: JSON.stringify(game)
-                                        })
-                                            .then(res => res.json())
-                                            .then(data => {
-                                                if (data.modifiedCount > 0) {
-                                                    console.log('database updated');
-                                                }
-                                            })
-                                    }
-                                    else {
-                                        const game = {
-                                            title,
-                                            coverImg,
-                                            reviews: [review]
-                                        }
-                                        fetch('http://localhost:5000/games', {
-                                            method: "POST",
-                                            headers: { "Content-Type": "application/json" },
-                                            body: JSON.stringify(game)
-                                        })
-                                            .then(res => res.json())
-                                            .then(data => {
-                                                if (data.insertedId) {
-                                                    toast.info('New Game is added to Database!');
-                                                }
-                                            })
-                                    }
-                                })
-                        }
-                    })
-            }
-        })
-    }
-
+const updateReview = () => {
     return (
         <div>
             <div className="w-10/12 mx-auto my-8 border rounded-xl sm:p-8">
@@ -229,11 +121,11 @@ const AddReview = () => {
                         </div>
                     </div>
                     <p>{errorMessage}</p>
-                    <input type="submit" value="Submit Review" className="btn w-full h-12 rounded-lg border"/>
+                    <input type="submit" value="Submit Review" className="btn w-full h-12 rounded-lg border" />
                 </form>
             </div>
         </div>
     );
 };
 
-export default AddReview;
+export default updateReview;
