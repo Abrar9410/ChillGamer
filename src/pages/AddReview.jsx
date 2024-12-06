@@ -99,6 +99,7 @@ const AddReview = () => {
                                             .then(data => {
                                                 if (data.insertedId) {
                                                     toast.info('New Game is added to Database!');
+                                                    form.reset();
                                                 }
                                             })
                                     }

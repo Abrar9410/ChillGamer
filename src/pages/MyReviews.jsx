@@ -7,6 +7,7 @@ const MyReviews = () => {
     const {user} = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         fetch('http://localhost:5000/reviews')
@@ -15,7 +16,7 @@ const MyReviews = () => {
             const userReviews = data?.filter(review => review.userEmail === user.email);
             setMyReviews(userReviews);
         })
-    },[])
+    },[reload])
 
     const handleUpdateReview = (id) => {
         setErrorMessage('');
@@ -62,8 +63,8 @@ const MyReviews = () => {
                     fetch('http://localhost:5000/games')
                         .then(res => res.json())
                         .then(games => {
+                            setReload(!reload);
                             const foundGame = games?.find(game => game.title === updatedReview.title);
-
                             if (foundGame) {
                                 const indexOfMyReview = foundGame.reviews.indexOf(foundGame.reviews.find(review => review.userEmail === user.email));
                                 foundGame.reviews[indexOfMyReview] = updatedReview;
@@ -92,15 +93,50 @@ const MyReviews = () => {
             })
     }
 
+    const handleDeleteReview = (id, gameTitle) => {
+        fetch(`http://localhost:5000/reviews/${id}`, {
+            method: "DELETE"
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.deletedCount>0) {
+                console.log("Review Deleted");
+                setReload(!reload);
+                fetch('http://localhost:5000/games')
+                    .then(res => res.json())
+                    .then(games => {
+                        const foundGame = games?.find(game => game.title === gameTitle);
+                        const remainingReviews = foundGame.reviews.filter(review => review.userEmail !== user.email);
+                        const game = {
+                            title: foundGame.title,
+                            coverImg: foundGame.coverImg,
+                            reviews: remainingReviews
+                        };
+                        fetch(`http://localhost:5000/games/${foundGame._id}`, {
+                            method: "PATCH",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(game)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.modifiedCount > 0) {
+                                    console.log('database updated');
+                                }
+                            })
+                    })
+            } 
+        })
+    }
+
     return (
         <div>
             {
                 myReviews.length? myReviews.map(review => 
                     <div key={review._id} className="w-10/12 mx-auto">
-                        <p>{review.title}</p>
-                        <p className="h-20">{review.description}</p>
+                        <p className="mt-8">{review.title}</p>
+                        <p className="h-8">{review.description}</p>
                         <button onClick={()=>document.getElementById(`${review._id}`).showModal()}>Update</button>
-                        <button>Delete</button>
+                        <button onClick={() => handleDeleteReview(review._id, review.title)}>Delete</button>
                         <dialog id={review._id} className="w-11/12 mx-auto max-h-[95vh] overflow-scroll">
                             <div className="w-10/12 mx-auto my-8 border rounded-xl sm:p-8">
                                 <form id="updateForm" className="sm:space-y-8">
