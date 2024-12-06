@@ -33,11 +33,11 @@ const Register = () => {
 
         createAccount(email, password)
             .then(result => {
-                setUser(result.user);
-                navigate("/");
-                toast.success("Registration Successful!!!",{
+                toast.success("Registration Successful!!!", {
                     position: "top-center"
                 });
+                setUser(result.user);
+                navigate("/");
                 setLoading(false);
             })
             .catch(error => setErrorMessage(error.message));
@@ -47,6 +47,9 @@ const Register = () => {
         setErrorMessage('');
         loginWithGoogle()
             .then(result => {
+                toast.success("Registration Successful!!!", {
+                    position: "top-center"
+                });
                 setUser(result.user);
                 navigate("/");
                 toast.success("Registration Successful!!!", {

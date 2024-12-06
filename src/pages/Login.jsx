@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
 
-    const { setUser, loginWithGoogle, loginWithEmailAndPassword, setUserEmail } = useContext(AuthContext);
+    const { setUser, loginWithGoogle, loginWithEmailAndPassword } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
@@ -20,6 +20,7 @@ const Login = () => {
         const password = e.target.password.value;
         loginWithEmailAndPassword(email, password)
             .then(result => {
+                toast.success('Login Successful!');
                 setUser(result.user);
                 navigate(location?.state ? location.state : "/");
             })
@@ -32,6 +33,7 @@ const Login = () => {
         setErrorMessage('');
         loginWithGoogle()
         .then(result => {
+            toast.success('Login Successful!');
             setUser(result.user);
             navigate(location?.state ? location.state : "/");
         })
@@ -42,11 +44,6 @@ const Login = () => {
     const handleShowPassword = e => {
         e.preventDefault();
         setShowPassword(!showPassword);
-    }
-
-    const handleForgotPassword = () => {
-        setUserEmail(emailRef.current.value);
-        navigate("/reset-password");
     }
 
     return (
@@ -69,7 +66,7 @@ const Login = () => {
                         <button onClick={handleShowPassword} className="absolute right-3 max-[249px]:bottom-14 bottom-11">
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </button>
-                        <label onClick={handleForgotPassword} className="label">
+                        <label className="label">
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
                     </div>

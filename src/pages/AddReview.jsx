@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 
 const AddReview = () => {
@@ -55,57 +56,63 @@ const AddReview = () => {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(review)
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.insertedId) {
-                            console.log("success");
-                            fetch('http://localhost:5000/games')
-                                .then(res => res.json())
-                                .then(games => {
-                                    const foundGame = games?.find(game => game.title === review.title);
+                .then(res => res.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Review added successfully!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        fetch('http://localhost:5000/games')
+                        .then(res => res.json())
+                        .then(games => {
+                            const foundGame = games?.find(game => game.title === review.title);
 
-                                    if (foundGame) {
-                                        const reviewsArray = foundGame.reviews;
-                                        const updatedReviewsArray = [...reviewsArray, review];
-                                        const game = {
-                                            title,
-                                            coverImg,
-                                            reviews: updatedReviewsArray
-                                        };
-                                        fetch(`http://localhost:5000/games/${foundGame._id}`, {
-                                            method: "PATCH",
-                                            headers: { "Content-Type": "application/json" },
-                                            body: JSON.stringify(game)
-                                        })
-                                            .then(res => res.json())
-                                            .then(data => {
-                                                if (data.modifiedCount > 0) {
-                                                    console.log('database updated');
-                                                }
-                                            })
-                                    }
-                                    else {
-                                        const game = {
-                                            title,
-                                            coverImg,
-                                            reviews: [review]
-                                        }
-                                        fetch('http://localhost:5000/games', {
-                                            method: "POST",
-                                            headers: { "Content-Type": "application/json" },
-                                            body: JSON.stringify(game)
-                                        })
-                                            .then(res => res.json())
-                                            .then(data => {
-                                                if (data.insertedId) {
-                                                    toast.info('New Game is added to Database!');
-                                                    form.reset();
-                                                }
-                                            })
+                            if (foundGame) {
+                                const reviewsArray = foundGame.reviews;
+                                const updatedReviewsArray = [...reviewsArray, review];
+                                const game = {
+                                    title,
+                                    coverImg,
+                                    reviews: updatedReviewsArray
+                                };
+                                fetch(`http://localhost:5000/games/${foundGame._id}`, {
+                                    method: "PATCH",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify(game)
+                                })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (data.modifiedCount > 0) {
+                                        toast.info('database updated');
                                     }
                                 })
-                        }
-                    })
+                            }
+                            else {
+                                const game = {
+                                    title,
+                                    coverImg,
+                                    reviews: [review]
+                                }
+                                fetch('http://localhost:5000/games', {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify(game)
+                                })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (data.insertedId) {
+                                        toast.success('Congrates! You are First to review this Game');
+                                        form.reset();
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
             }
         })
     }

@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 
 const MyReviews = () => {
@@ -56,76 +58,94 @@ const MyReviews = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(updatedReview)
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount>0) {
-                    console.log("success");
-                    fetch('http://localhost:5000/games')
-                        .then(res => res.json())
-                        .then(games => {
-                            setReload(!reload);
-                            const foundGame = games?.find(game => game.title === updatedReview.title);
-                            if (foundGame) {
-                                const indexOfMyReview = foundGame.reviews.indexOf(foundGame.reviews.find(review => review.userEmail === user.email));
-                                foundGame.reviews[indexOfMyReview] = updatedReview;
-                                const game = {
-                                    title,
-                                    coverImg,
-                                    reviews: foundGame.reviews
-                                };
-                                fetch(`http://localhost:5000/games/${foundGame._id}`, {
-                                    method: "PATCH",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify(game)
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-                                        if (data.modifiedCount > 0) {
-                                            console.log('database updated');
-                                        }
-                                    })
-                            }
-                            else {
-                                console.log('There has been an error. Please Try again!');
-                            }
-                        })
-                }
-            })
+        .then(res => res.json())
+        .then(data => {
+            if (data.modifiedCount>0) {
+                document.getElementById(id).close();
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Your review has been updated",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setReload(!reload);
+                fetch('http://localhost:5000/games')
+                .then(res => res.json())
+                .then(games => {
+                    const foundGame = games?.find(game => game.title === updatedReview.title);
+                    const indexOfMyReview = foundGame.reviews.indexOf(foundGame.reviews.find(review => review.userEmail === user.email));
+                    foundGame.reviews[indexOfMyReview] = updatedReview;
+                    const game = {
+                        title,
+                        coverImg,
+                        reviews: foundGame.reviews
+                    };
+                    fetch(`http://localhost:5000/games/${foundGame._id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(game)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount > 0) {
+                            toast.info('database updated');
+                        }
+                    })        
+                })
+            }
+        })
     }
 
     const handleDeleteReview = (id, gameTitle) => {
-        fetch(`http://localhost:5000/reviews/${id}`, {
-            method: "DELETE"
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.deletedCount>0) {
-                console.log("Review Deleted");
-                setReload(!reload);
-                fetch('http://localhost:5000/games')
-                    .then(res => res.json())
-                    .then(games => {
-                        const foundGame = games?.find(game => game.title === gameTitle);
-                        const remainingReviews = foundGame.reviews.filter(review => review.userEmail !== user.email);
-                        const game = {
-                            title: foundGame.title,
-                            coverImg: foundGame.coverImg,
-                            reviews: remainingReviews
-                        };
-                        fetch(`http://localhost:5000/games/${foundGame._id}`, {
-                            method: "PATCH",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(game)
-                        })
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/reviews/${id}`, {
+                    method: "DELETE"
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your review has been deleted.",
+                            icon: "success"
+                        });
+                        setReload(!reload);
+                        fetch('http://localhost:5000/games')
+                        .then(res => res.json())
+                        .then(games => {
+                            const foundGame = games?.find(game => game.title === gameTitle);
+                            const remainingReviews = foundGame.reviews.filter(review => review.userEmail !== user.email);
+                            const game = {
+                                title: foundGame.title,
+                                coverImg: foundGame.coverImg,
+                                reviews: remainingReviews
+                            };
+                            fetch(`http://localhost:5000/games/${foundGame._id}`, {
+                                method: "PATCH",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(game)
+                            })
                             .then(res => res.json())
                             .then(data => {
                                 if (data.modifiedCount > 0) {
-                                    console.log('database updated');
+                                    toast.info('database updated');
                                 }
                             })
-                    })
-            } 
-        })
+                        })
+                    }
+                })
+            }
+        });
     }
 
     return (
