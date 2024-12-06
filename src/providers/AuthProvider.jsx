@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 
@@ -10,49 +10,30 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [userEmail, setUserEmail] = useState('');
-    console.log(loading, user);
 
     // Google Sign-In
     const googleProvider = new GoogleAuthProvider();
     const loginWithGoogle = () => {
         setLoading(true);
-        return (
-            signInWithPopup(auth, googleProvider)
-            // .then(result => setUser(result.user))
-            // .catch(error => alert("ERROR", error.code))
-        );
+        return signInWithPopup(auth, googleProvider);
     }
 
     // Email-Password Sign In
     const loginWithEmailAndPassword = (email, password) => {
         setLoading(true);
-        return (
-            signInWithEmailAndPassword(auth, email, password)
-            // .then(result => setUser(result.user))
-            // .catch(error => console.log("Error", error.message))
-        );
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     // Create/Register/Sign-Up New User with Email-Password
     const createAccount = (email, password) => {
         setLoading(true);
-        return (
-            createUserWithEmailAndPassword(auth, email, password)
-            // .then(result => setUser(result.user))
-            // .catch(error => console.log("Error", error.message))
-        );
+        return createUserWithEmailAndPassword(auth, email, password);
     }
 
-    // Reset Password
-    const resetPassword = (email) => {
-        return sendPasswordResetEmail(auth, email);
-                // .then(() => {
-                //      const link = "mail.google.com";
-                //      window.open(`//${link}`, "_blank");
-                //      logOut();
-                //      setLoading(false);
-                // })
-                // .catch(error => console.log(error.message))
+    // Update User-Profile
+    const updateUserProfile = (updateInfo) => {
+        setLoading(true);
+        return updateProfile(auth.currentUser, updateInfo);
     }
 
     // Log-Out 
@@ -81,7 +62,7 @@ const AuthProvider = ({children}) => {
         setLoading,
         userEmail,
         setUserEmail,
-        resetPassword,
+        updateUserProfile,
         logOut
     }
 
