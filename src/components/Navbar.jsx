@@ -52,8 +52,8 @@ const Navbar = () => {
                             <li><NavLink to="/">Home</NavLink></li>
                             <li><NavLink to="/allReviews">All Reviews</NavLink></li>
                             <li><NavLink to="/addReview">Add Review</NavLink></li>
-                            {/*user && */<li><NavLink to="/myReviews">My Reviews</NavLink></li>}
-                            {/*user && */<li><NavLink to="/watchList">Watchlist</NavLink></li>}
+                            {user && <li><NavLink to="/myReviews">My Reviews</NavLink></li>}
+                            {user && <li><NavLink to="/watchList">Watchlist</NavLink></li>}
                         </ul>
                     </div>
                     <Link to="/" className="flex max-[305px]:flex-col max-[305px]:gap-0 items-center gap-2">
@@ -68,8 +68,8 @@ const Navbar = () => {
                             <NavLink to="/" className={({isActive})=>isActive? "underline": "hover:scale-105"}>Home</NavLink>
                             <NavLink to="/allReviews" className={({isActive})=>isActive? "underline": "hover:scale-105"}>All Reviews</NavLink>
                             <NavLink to="/addReview" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>Add Review</NavLink>
-                            {/*user && */<NavLink to="/myReviews" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>My Reviews</NavLink>}
-                            {/*user && */<NavLink to="/watchList" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>Watchlist</NavLink>}
+                            {user && <NavLink to="/myReviews" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>My Reviews</NavLink>}
+                            {user && <NavLink to="/watchList" className={({ isActive }) => isActive ? "underline" : "hover:scale-105"}>Watchlist</NavLink>}
                         </div>
                 }
                 {

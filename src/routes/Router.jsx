@@ -23,7 +23,8 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/allReviews",
-                element: <AllReviews></AllReviews>
+                element: <AllReviews></AllReviews>,
+                loader: () => fetch('https://chill-gamer-server-phi.vercel.app/reviews')
             },
             {
                 path: "/addReview",

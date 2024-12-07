@@ -34,7 +34,8 @@ const Register = () => {
         createAccount(email, password)
             .then(result => {
                 toast.success("Registration Successful!!!", {
-                    position: "top-center"
+                    position: "top-center",
+                    autoClose: 2000
                 });
                 setUser(result.user);
                 const profile = {
@@ -56,12 +57,14 @@ const Register = () => {
         loginWithGoogle()
             .then(result => {
                 toast.success("Registration Successful!!!", {
-                    position: "top-center"
+                    position: "top-center",
+                    autoClose: 2000
                 });
                 setUser(result.user);
                 navigate("/");
                 toast.success("Registration Successful!!!", {
-                    position: "top-center"
+                    position: "top-center",
+                    autoClose: 2000
                 });
                 setLoading(false);
             })

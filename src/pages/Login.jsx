@@ -10,6 +10,7 @@ const Login = () => {
 
     const { setUser, loginWithGoogle, loginWithEmailAndPassword } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
     const emailRef = useRef();
@@ -20,12 +21,15 @@ const Login = () => {
         const password = e.target.password.value;
         loginWithEmailAndPassword(email, password)
             .then(result => {
-                toast.success('Login Successful!');
+                toast.success('Login Successful!', {
+                    autoClose: 2000
+                });
                 setUser(result.user);
                 navigate(location?.state ? location.state : "/");
             })
             .catch(error => toast.error(error.message,{
-                position: "top-center"
+                position: "top-center",
+                autoClose: 2000
             }));
     }
 
@@ -38,7 +42,8 @@ const Login = () => {
             navigate(location?.state ? location.state : "/");
         })
         .catch(error => toast.error(error.message, {
-            position: "top-center"
+            position: "top-center",
+            autoClose: 2000
         }));
     }
     const handleShowPassword = e => {
@@ -71,6 +76,7 @@ const Login = () => {
                         </label>
                     </div>
                     <div className="form-control gap-4 mt-4 items-center">
+                        <p className="text-red-600">{errorMessage}</p>
                         <button className="btn btn-primary w-full">Login</button>
                         <p className="text-center">Don't Have an Account? <Link to="/register" className="text-blue-500">Register</Link></p>
                         <p onClick={handleGoogleLogin} className="cursor-pointer hover:scale-105 py-1 px-2 rounded-lg flex justify-center items-center gap-1 bg-[#575757] text-white w-max">

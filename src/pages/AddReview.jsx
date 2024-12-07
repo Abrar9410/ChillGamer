@@ -43,7 +43,7 @@ const AddReview = () => {
             userName,
             userEmail
         };
-        fetch('http://localhost:5000/reviews')
+        fetch('https://chill-gamer-server-phi.vercel.app/reviews')
         .then(res => res.json())
         .then(data => {
             const query = data?.filter(review => review.userEmail === userEmail).find(userReview => userReview.title === title);
@@ -51,7 +51,7 @@ const AddReview = () => {
                 setErrorMessage("You already have given a review on this Game! You may want to update your review from 'My Reviews' page");
             }
             else {
-                fetch('http://localhost:5000/reviews', {
+                fetch('https://chill-gamer-server-phi.vercel.app/reviews', {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(review)
@@ -66,7 +66,7 @@ const AddReview = () => {
                             showConfirmButton: false,
                             timer: 1500
                         });
-                        fetch('http://localhost:5000/games')
+                        fetch('https://chill-gamer-server-phi.vercel.app/games')
                         .then(res => res.json())
                         .then(games => {
                             const foundGame = games?.find(game => game.title === review.title);
@@ -79,7 +79,7 @@ const AddReview = () => {
                                     coverImg,
                                     reviews: updatedReviewsArray
                                 };
-                                fetch(`http://localhost:5000/games/${foundGame._id}`, {
+                                fetch(`https://chill-gamer-server-phi.vercel.app/games/${foundGame._id}`, {
                                     method: "PATCH",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(game)
@@ -87,7 +87,9 @@ const AddReview = () => {
                                 .then(res => res.json())
                                 .then(data => {
                                     if (data.modifiedCount > 0) {
-                                        toast.info('database updated');
+                                        toast.info('database updated', {
+                                            autoClose: 2000
+                                        });
                                     }
                                 })
                             }
@@ -97,7 +99,7 @@ const AddReview = () => {
                                     coverImg,
                                     reviews: [review]
                                 }
-                                fetch('http://localhost:5000/games', {
+                                fetch('https://chill-gamer-server-phi.vercel.app/games', {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(game)
@@ -105,7 +107,9 @@ const AddReview = () => {
                                 .then(res => res.json())
                                 .then(data => {
                                     if (data.insertedId) {
-                                        toast.success('Congrates! You are First to review this Game');
+                                        toast.success('Congrates! You are the First to review this Game.', {
+                                            autoClose: 2000
+                                        });
                                         form.reset();
                                     }
                                 })
@@ -155,6 +159,7 @@ const AddReview = () => {
                                 <option value="Horror">Horror</option>
                                 <option value="Puzzle">Puzzle</option>
                                 <option value="Role-playing">Role-playing</option>
+                                <option value="RPG">RPG</option>
                                 <option value="Simulation">Simulation</option>
                                 <option value="Strategy">Strategy</option>
                                 <option value="Sports">Sports</option>
@@ -225,7 +230,7 @@ const AddReview = () => {
                     <div className="grid sm:grid-cols-2 gap-4">
                         <div>
                             <label className="label">
-                                <span className="font-semibold">Username</span>
+                                <span className="font-semibold">User Name</span>
                             </label>
                             <input type="text" placeholder="username" name="userName" className="input input-bordered w-full" value={user.displayName} readOnly required />
                         </div>

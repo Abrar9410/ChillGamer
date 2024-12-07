@@ -12,7 +12,7 @@ const MyReviews = () => {
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch('https://chill-gamer-server-phi.vercel.app/reviews')
         .then(res => res.json())
         .then(data => {
             const userReviews = data?.filter(review => review.userEmail === user.email);
@@ -22,7 +22,7 @@ const MyReviews = () => {
 
     const handleUpdateReview = (id) => {
         setErrorMessage('');
-        const form = document.getElementById('updateForm');
+        const form = document.getElementById(`${id}a`);
         const title = form.title.value;
         const coverImg = form.coverImg.value;
         const description = form.description.value;
@@ -53,7 +53,7 @@ const MyReviews = () => {
             userName,
             userEmail
         };
-        fetch(`http://localhost:5000/reviews/${id}`, {
+        fetch(`https://chill-gamer-server-phi.vercel.app/reviews/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(updatedReview)
@@ -70,7 +70,7 @@ const MyReviews = () => {
                     timer: 1500
                 });
                 setReload(!reload);
-                fetch('http://localhost:5000/games')
+                fetch('https://chill-gamer-server-phi.vercel.app/games')
                 .then(res => res.json())
                 .then(games => {
                     const foundGame = games?.find(game => game.title === updatedReview.title);
@@ -81,7 +81,7 @@ const MyReviews = () => {
                         coverImg,
                         reviews: foundGame.reviews
                     };
-                    fetch(`http://localhost:5000/games/${foundGame._id}`, {
+                    fetch(`https://chill-gamer-server-phi.vercel.app/games/${foundGame._id}`, {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(game)
@@ -89,7 +89,9 @@ const MyReviews = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.modifiedCount > 0) {
-                            toast.info('database updated');
+                            toast.info('database updated', {
+                                autoClose: 2000
+                            });
                         }
                     })        
                 })
@@ -108,7 +110,7 @@ const MyReviews = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/reviews/${id}`, {
+                fetch(`https://chill-gamer-server-phi.vercel.app/reviews/${id}`, {
                     method: "DELETE"
                 })
                 .then(res => res.json())
@@ -120,7 +122,7 @@ const MyReviews = () => {
                             icon: "success"
                         });
                         setReload(!reload);
-                        fetch('http://localhost:5000/games')
+                        fetch('https://chill-gamer-server-phi.vercel.app/games')
                         .then(res => res.json())
                         .then(games => {
                             const foundGame = games?.find(game => game.title === gameTitle);
@@ -130,7 +132,7 @@ const MyReviews = () => {
                                 coverImg: foundGame.coverImg,
                                 reviews: remainingReviews
                             };
-                            fetch(`http://localhost:5000/games/${foundGame._id}`, {
+                            fetch(`https://chill-gamer-server-phi.vercel.app/games/${foundGame._id}`, {
                                 method: "PATCH",
                                 headers: { "Content-Type": "application/json" },
                                 body: JSON.stringify(game)
@@ -138,7 +140,9 @@ const MyReviews = () => {
                             .then(res => res.json())
                             .then(data => {
                                 if (data.modifiedCount > 0) {
-                                    toast.info('database updated');
+                                    toast.info('database updated', {
+                                        autoClose: 2000
+                                    });
                                 }
                             })
                         })
@@ -154,12 +158,12 @@ const MyReviews = () => {
                 myReviews.length? myReviews.map(review => 
                     <div key={review._id} className="w-10/12 mx-auto">
                         <p className="mt-8">{review.title}</p>
-                        <p className="h-8">{review.description}</p>
+                        <p className="h-8 overflow-scroll">{review.description}</p>
                         <button onClick={()=>document.getElementById(`${review._id}`).showModal()}>Update</button>
                         <button onClick={() => handleDeleteReview(review._id, review.title)}>Delete</button>
                         <dialog id={review._id} className="w-11/12 mx-auto max-h-[95vh] overflow-scroll">
                             <div className="w-10/12 mx-auto my-8 border rounded-xl sm:p-8">
-                                <form id="updateForm" className="sm:space-y-8">
+                                <form id={`${review._id}a`} className="sm:space-y-8">
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="label">
@@ -194,6 +198,7 @@ const MyReviews = () => {
                                                 <option value="Horror">Horror</option>
                                                 <option value="Puzzle">Puzzle</option>
                                                 <option value="Role-playing">Role-playing</option>
+                                                <option value="RPG">RPG</option>
                                                 <option value="Simulation">Simulation</option>
                                                 <option value="Strategy">Strategy</option>
                                                 <option value="Sports">Sports</option>
@@ -264,7 +269,7 @@ const MyReviews = () => {
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="label">
-                                                <span className="font-semibold">Username</span>
+                                                <span className="font-semibold">User Name</span>
                                             </label>
                                             <input type="text" placeholder="username" name="userName" className="input input-bordered w-full" value={user.displayName} readOnly required />
                                         </div>
