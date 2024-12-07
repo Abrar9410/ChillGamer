@@ -1,9 +1,10 @@
+import ToggleTheme from "../components/ToggleTheme";
 
 
 const HomePage = () => {
     return (
         <div>
-            HOMEPAGE
+            <ToggleTheme></ToggleTheme>
         </div>
     );
 };
