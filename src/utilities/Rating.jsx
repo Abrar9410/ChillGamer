@@ -30,7 +30,7 @@ const Rating = ({ rating }) => {
     }
 
     return (
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-1">
             {stars?.map((star, index) => (
                 <span key={index}>
                     <img className='w-2 h-2 sm:w-4 sm:h-4' src={star} alt="star_img" />

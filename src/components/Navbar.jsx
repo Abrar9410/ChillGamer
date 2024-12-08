@@ -63,7 +63,7 @@ const Navbar = () => {
                         </Link>
                         {
                             location.pathname === "/login" || location.pathname === "/register" ? <div></div> :
-                                <div className="hidden md:flex justify-center items-center gap-4 bg-black text-white max-lg:text-sm p-1 rounded-md">
+                                <div className="hidden md:flex justify-center items-center gap-4 bg-black text-white max-lg:text-sm px-2 py-1 rounded-md">
                                     <NavLink to="/" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Home</NavLink>
                                     <NavLink to="/allReviews" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>All Reviews</NavLink>
                                     <NavLink to="/addReview" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Add Review</NavLink>
