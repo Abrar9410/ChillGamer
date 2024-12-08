@@ -60,7 +60,7 @@ const Footer = () => {
                 </Link>
             </div>
             <hr className="my-4 sm:my-8" />
-            <p className="text-center text-xs min-[435px]:text-sm text-white/60">Copyright © {new Date().getFullYear()} - All rights reserved by Discount PRO Ltd</p>
+            <p className="text-center text-xs min-[435px]:text-sm text-white/60">Copyright © {new Date().getFullYear()} - All rights reserved by Chill Gamer Ltd</p>
         </div>
     );
 };
