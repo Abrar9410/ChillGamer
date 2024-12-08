@@ -27,5 +27,5 @@ This project, Chill Gamer, is a user-friendly game review application. The goal 
    * User must be logged in to provide reviews and navigating private routes.
 
 
-[Live Link](https://a-7-build-dream-squad.netlify.app/)
+[Live Link](https://assignment-10-chill-gamer.netlify.app/)
 

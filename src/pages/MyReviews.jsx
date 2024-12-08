@@ -161,11 +161,17 @@ const MyReviews = () => {
 
     return (
         <div>
+            <div className="flex flex-col items-center gap-4 text-center bg-gradient-to-r from-red-800 via-orange-700 to-rose-400 py-12 px-2">
+                <h2 className="max-w-[90vw] text-black text-lg min-[400px]:text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold">My Reviews</h2>
+                <p className="max-w-[90vw] text-black/85 font-semibold">
+                    Here are all the reviews you have added until now.
+                    See if you want to update or delete any review.
+                </p>
+            </div>
             {
                 myReviews.length? myReviews.map(review => 
                     <div key={review._id} className="w-10/12 mx-auto">
-                        <p className="mt-8">{review.title}</p>
-                        <p className="h-8 overflow-scroll">{review.description}</p>
+                        
                         <button onClick={()=>document.getElementById(`${review._id}`).showModal()}>Update</button>
                         <button onClick={() => handleDeleteReview(review._id, review.title)}>Delete</button>
                         <dialog id={review._id} className="w-11/12 mx-auto max-h-[95vh] overflow-scroll">
