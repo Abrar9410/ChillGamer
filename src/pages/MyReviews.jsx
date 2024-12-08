@@ -76,10 +76,14 @@ const MyReviews = () => {
                     const foundGame = games?.find(game => game.title === updatedReview.title);
                     const indexOfMyReview = foundGame.reviews.indexOf(foundGame.reviews.find(review => review.userEmail === user.email));
                     foundGame.reviews[indexOfMyReview] = updatedReview;
+                    const ratingsArray = foundGame.reviews.map(rev => rev.rating);
+                    const totalRating = ratingsArray.reduce((prev, curr) => prev + curr, 0);
+                    const avgRating = totalRating / foundGame.reviews.length;
                     const game = {
                         title,
                         coverImg,
-                        reviews: foundGame.reviews
+                        reviews: foundGame.reviews,
+                        avgRating
                     };
                     fetch(`https://chill-gamer-server-phi.vercel.app/games/${foundGame._id}`, {
                         method: "PATCH",
@@ -127,6 +131,9 @@ const MyReviews = () => {
                         .then(games => {
                             const foundGame = games?.find(game => game.title === gameTitle);
                             const remainingReviews = foundGame.reviews.filter(review => review.userEmail !== user.email);
+                            const ratingsArray = remainingReviews.map(rev => rev.rating);
+                            const totalRating = ratingsArray.reduce((prev, curr) => prev + curr, 0);
+                            const avgRating = totalRating / remainingReviews.length;
                             const game = {
                                 title: foundGame.title,
                                 coverImg: foundGame.coverImg,

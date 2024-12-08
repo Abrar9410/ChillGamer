@@ -1,23 +1,30 @@
-# **BPL-Dream Squad Builder**
+# **Chill Gamer: A Game Review Application**
 
-This project will give you a wonderful experience of building your dream cricket team. This was built for an assignment given by my Programming-Hero instructors. This is one of my earliest projects using React.js framework. I also used TailwindCSS & DaisyUI to help with the styling.
+This project, Chill Gamer, is a user-friendly game review application. The goal of this project is to design a platform where users can explore and share game reviews. Key features such as user authentication and review management are implemented to enhance the user experience. The application has a clean and responsive UI, focused on simplicity and functionality to provide a "chill" experience.  
 
 
 ## **Technologies used:**
 
    * React.js
+   * React-router-DOM
    * Tailwind CSS
    * DaisyUI
-   * React-Toastify
+   * React-toastify
+   * React-simple-typewriter
+   * React-tooltip
+   * Sweet Alert 2
+   * Swiper.js
+   * MongoDB
 
 
 ## **Key Features of the project:**
 
-   * 1) You can select 6 different players out of 10 available players after claiming some free credit.
-   * 2) There will be a warning toast message if you exceed the limit of your budget.
-   * 3) There will be a warning if you want to select same player twice.
-   * 4) You can see your selected players as a list in the 'selected' tab.
-   * 5) You can easily switch between the 'Available Players' tab & the 'Selected Players' tab by toggling the designated buttons.
+   * Mongo DB is used for CRUD operations and managing all the data.
+   * Firebase Authentication system.
+   * Users can provide a review on any game they like. Later, they can update or delete their reviews.
+   * Users can see all the reviews of all the users.
+   * Users can shortlist games upon viewing the reviews of other users. They can later manage their shortlist/watchlist from Watchlist page.
+   * User must be logged in to provide reviews and navigating private routes.
 
 
 [Live Link](https://a-7-build-dream-squad.netlify.app/)

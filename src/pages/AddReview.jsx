@@ -74,10 +74,14 @@ const AddReview = () => {
                             if (foundGame) {
                                 const reviewsArray = foundGame.reviews;
                                 const updatedReviewsArray = [...reviewsArray, review];
+                                const ratingsArray = updatedReviewsArray.map(upRev=>upRev.rating);
+                                const totalRating = ratingsArray.reduce((prev, curr) => prev + curr, 0);
+                                const avgRating = totalRating / updatedReviewsArray.length;
                                 const game = {
                                     title,
                                     coverImg,
-                                    reviews: updatedReviewsArray
+                                    reviews: updatedReviewsArray,
+                                    avgRating
                                 };
                                 fetch(`https://chill-gamer-server-phi.vercel.app/games/${foundGame._id}`, {
                                     method: "PATCH",
@@ -90,6 +94,7 @@ const AddReview = () => {
                                         toast.info('database updated', {
                                             autoClose: 2000
                                         });
+                                        form.reset();
                                     }
                                 })
                             }
@@ -97,7 +102,8 @@ const AddReview = () => {
                                 const game = {
                                     title,
                                     coverImg,
-                                    reviews: [review]
+                                    reviews: [review],
+                                    avgRating: review.rating
                                 }
                                 fetch('https://chill-gamer-server-phi.vercel.app/games', {
                                     method: "POST",

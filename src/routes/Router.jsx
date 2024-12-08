@@ -9,6 +9,8 @@ import AddReview from "../pages/AddReview";
 import MyReviews from "../pages/MyReviews";
 import WatchList from "../pages/WatchList";
 import PrivateRoute from "./PrivateRoute";
+import ReviewDetails from "../pages/ReviewDetails";
+import GameDetails from "../pages/GameDetails";
 
 
 const Router = createBrowserRouter([
@@ -25,6 +27,16 @@ const Router = createBrowserRouter([
                 path: "/allReviews",
                 element: <AllReviews></AllReviews>,
                 loader: () => fetch('https://chill-gamer-server-phi.vercel.app/reviews')
+            },
+            {
+                path: "/allReviews/:id",
+                element: <ReviewDetails></ReviewDetails>,
+                loader: ({params}) => fetch(`https://chill-gamer-server-phi.vercel.app/reviews/${params.id}`)
+            },
+            {
+                path: "/games/:id",
+                element: <GameDetails></GameDetails>,
+                loader: ({params}) => fetch(`https://chill-gamer-server-phi.vercel.app/games/${params.id}`)
             },
             {
                 path: "/addReview",
