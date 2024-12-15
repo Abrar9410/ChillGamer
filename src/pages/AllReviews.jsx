@@ -9,7 +9,38 @@ const AllReviews = () => {
     const data = useLoaderData();
     const [allReviews, setAllReviews] = useState(data);
     const [dataLoading, setDataLoading] = useState(true);
+    const [filterBtnText, setFilterBtnText] = useState('Filter (Genre)');
+    const [sortBtnText, setSortBtnText] = useState('Sort by');
     const navigate = useNavigate();
+
+    const handleFilter = e => {
+        setDataLoading(true);
+        const filterBy = e.target.innerText;
+        setFilterBtnText(filterBy);
+        document.querySelector('#filterBtn').removeAttribute('open');
+        const filteredReviews = [...data].filter(review => review.genre === filterBy);
+        setAllReviews(filteredReviews);
+        setDataLoading(false);
+    }
+
+    const handleSort = e => {
+        setDataLoading(true);
+        const sortBy = e.target.innerText;
+        setSortBtnText(`Sorted (${sortBy})`);
+        document.getElementById('sortBtn').removeAttribute('open');
+        if (sortBy==='Rating') {
+            const sortedByRating = [...allReviews]?.sort((a, b) => b.rating - a.rating);
+            setAllReviews(sortedByRating);
+            setDataLoading(false);
+            return;   
+        }
+        if (sortBy==='Year') {
+            const sortedByYear = [...allReviews]?.sort((a, b) => b.publishedYear - a.publishedYear);
+            setAllReviews(sortedByYear);
+            setDataLoading(false);
+            return;
+        }
+    }
 
     useEffect(() => {
         if (allReviews) {
@@ -18,7 +49,7 @@ const AllReviews = () => {
         else {
             setAllReviews([]);
         }
-    }, [allReviews])
+    }, [])
 
     return (
         <div>
@@ -29,35 +60,35 @@ const AllReviews = () => {
                 </p>
             </div>
             <div className="w-11/12 mx-auto my-8 flex justify-between">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn">Filter</div>
-                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] p-2 shadow">
-                        <li>Action</li>
-                        <li>Action-Adventure</li>
-                        <li>Adventure</li>
-                        <li>Board Game</li>
-                        <li>Horror</li>
-                        <li>Puzzle</li>
-                        <li>Role-playing</li>
-                        <li>RPG</li>
-                        <li>Simulation</li>
-                        <li>Strategy</li>
-                        <li>Sports</li>
+                <details className="dropdown" id="filterBtn">
+                    <summary tabIndex={0} role="button" className="btn bg-cyan-300 outline-none hover:bg-cyan-300 hover:scale-105">{filterBtnText}</summary>
+                    <ul onClick={handleFilter} tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-max p-2 shadow">
+                        <li className="cursor-pointer hover:bg-cyan-300">Action</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Action-Adventure</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Adventure</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Board Game</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Horror</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Puzzle</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Role-playing</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">RPG</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Simulation</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Strategy</li>
+                        <li className="cursor-pointer hover:bg-cyan-300">Sports</li>
                     </ul>
-                </div>
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn">Sort by</div>
-                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] p-2 shadow">
-                        <li>Rating</li>
-                        <li>Year</li>
+                </details>
+                <details className="dropdown" id="sortBtn">
+                    <summary tabIndex={0} role="button" className="btn bg-orange-500 outline-none hover:bg-orange-500 hover:scale-105">{sortBtnText}</summary>
+                    <ul onClick={handleSort} tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] p-2 shadow">
+                        <li className="cursor-pointer hover:bg-orange-500">Rating</li>
+                        <li className="cursor-pointer hover:bg-orange-500">Year</li>
                     </ul>
-                </div>
+                </details>
             </div>
             {
                 dataLoading? <Loading></Loading>:
-                <div className="w-11/12 sm:w-10/12 mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="w-11/12 sm:w-10/12 mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
                     {
-                        allReviews && allReviews.map(review =>
+                        allReviews.length? allReviews.map(review =>
                             <div key={review._id} className="border rounded-xl shadow-xl p-8 flex flex-col gap-4">
                                 <div>
                                     <img src={review.coverImg} alt="" className="w-full rounded-lg" />
@@ -79,7 +110,8 @@ const AllReviews = () => {
                                 }
                                 </p>
                             </div>
-                        )
+                        ):
+                        <div className="md:col-span-2 xl:col-span-3 text-center text-3xl text-gray-400 font-semibold">No Reviews to Show</div>
                     }
                 </div>    
             }
