@@ -28,10 +28,10 @@ const Navbar = () => {
     }
 
     return (
-        <div className="bg-gradient-to-r from-red-800 via-orange-700 to-rose-400">
+        <div className="bg-gradient-to-r from-red-800 via-orange-700 to-rose-400 sticky top-0 z-10">
             <div className="w-11/12 lg:w-10/12 mx-auto py-1 md:py-2 rounded-lg">
                 <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-10">
+                    <div className="flex items-center gap-2 sm:gap-3 md:gap-0">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn-ghost md:hidden">
                                 <svg
@@ -51,8 +51,8 @@ const Navbar = () => {
                                 tabIndex={0}
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                                 <li><NavLink to="/">Home</NavLink></li>
-                                <li><NavLink to="/allReviews">All Reviews</NavLink></li>
-                                <li><NavLink to="/addReview">Add Review</NavLink></li>
+                                <li><NavLink to="/allReviews">All Reviews</NavLink></li>                                
+                                {user && <li><NavLink to="/addReview">Add Review</NavLink></li>}
                                 {user && <li><NavLink to="/myReviews">My Reviews</NavLink></li>}
                                 {user && <li><NavLink to="/watchList">Watchlist</NavLink></li>}
                             </ul>
@@ -63,10 +63,10 @@ const Navbar = () => {
                         </Link>
                         {
                             location.pathname === "/login" || location.pathname === "/register" ? <div></div> :
-                                <div className="hidden md:flex justify-center items-center gap-4 bg-black text-white max-lg:text-sm px-2 py-1 rounded-md">
+                                <div className="hidden md:flex justify-center items-center gap-4 bg-black text-white max-lg:text-sm px-2 py-1 rounded-md md:ml-4 lg:ml-10">
                                     <NavLink to="/" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Home</NavLink>
-                                    <NavLink to="/allReviews" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>All Reviews</NavLink>
-                                    <NavLink to="/addReview" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Add Review</NavLink>
+                                    <NavLink to="/allReviews" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>All Reviews</NavLink>                                    
+                                    {user && <NavLink to="/addReview" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Add Review</NavLink>}
                                     {user && <NavLink to="/myReviews" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>My Reviews</NavLink>}
                                     {user && <NavLink to="/watchList" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Watchlist</NavLink>}
                                 </div>

@@ -59,34 +59,34 @@ const AllReviews = () => {
                     <br/>Happy Gaming!!
                 </p>
             </div>
-            <div className="w-11/12 mx-auto my-8 flex justify-between">
+            <div className="w-11/12 lg:w-10/12 mx-auto my-8 flex justify-between">
                 <details className="dropdown" id="filterBtn">
-                    <summary tabIndex={0} role="button" className="btn bg-cyan-300 outline-none hover:bg-cyan-300 hover:scale-105">{filterBtnText}</summary>
+                    <summary tabIndex={0} role="button" className="btn bg-red-600 outline-none hover:bg-red-600 hover:scale-105">{filterBtnText}</summary>
                     <ul onClick={handleFilter} tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-max p-2 shadow">
-                        <li className="cursor-pointer hover:bg-cyan-300">Action</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Action-Adventure</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Adventure</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Board Game</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Horror</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Puzzle</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Role-playing</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">RPG</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Simulation</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Strategy</li>
-                        <li className="cursor-pointer hover:bg-cyan-300">Sports</li>
+                        <li className="cursor-pointer hover:bg-red-600">Action</li>
+                        <li className="cursor-pointer hover:bg-red-600">Action-Adventure</li>
+                        <li className="cursor-pointer hover:bg-red-600">Adventure</li>
+                        <li className="cursor-pointer hover:bg-red-600">Board Game</li>
+                        <li className="cursor-pointer hover:bg-red-600">Horror</li>
+                        <li className="cursor-pointer hover:bg-red-600">Puzzle</li>
+                        <li className="cursor-pointer hover:bg-red-600">Role-playing</li>
+                        <li className="cursor-pointer hover:bg-red-600">RPG</li>
+                        <li className="cursor-pointer hover:bg-red-600">Simulation</li>
+                        <li className="cursor-pointer hover:bg-red-600">Strategy</li>
+                        <li className="cursor-pointer hover:bg-red-600">Sports</li>
                     </ul>
                 </details>
                 <details className="dropdown" id="sortBtn">
-                    <summary tabIndex={0} role="button" className="btn bg-orange-500 outline-none hover:bg-orange-500 hover:scale-105">{sortBtnText}</summary>
+                    <summary tabIndex={0} role="button" className="btn bg-rose-400 outline-none hover:bg-rose-400 hover:scale-105">{sortBtnText}</summary>
                     <ul onClick={handleSort} tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] p-2 shadow">
-                        <li className="cursor-pointer hover:bg-orange-500">Rating</li>
-                        <li className="cursor-pointer hover:bg-orange-500">Year</li>
+                        <li className="cursor-pointer hover:bg-rose-400">Rating</li>
+                        <li className="cursor-pointer hover:bg-rose-400">Year</li>
                     </ul>
                 </details>
             </div>
             {
                 dataLoading? <Loading></Loading>:
-                <div className="w-11/12 sm:w-10/12 mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
+                <div className="w-11/12 sm:w-10/12 mx-auto grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mb-10">
                     {
                         allReviews.length? allReviews.map(review =>
                             <div key={review._id} className="border rounded-xl shadow-xl p-8 flex flex-col gap-4">
@@ -104,7 +104,7 @@ const AllReviews = () => {
                                 </div>
                                 <hr />
                                 <p className="max-h-48 overflow-scroll">{
-                                    <span>{review.description.slice(0, 250)}...
+                                    <span>{review.description.slice(0, 200)}...
                                         <span onClick={() => navigate(`/allReviews/${review._id}`)} className="font-bold hover:underline hover:cursor-pointer">see full review</span>
                                     </span>
                                 }

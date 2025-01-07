@@ -6,15 +6,16 @@ import { Typewriter } from "react-simple-typewriter";
 const UpcomingGames = () => {
     return (
         <>
-            <div className="w-11/12 sm:w-10/12 mx-auto flex flex-col items-center gap-4 mt-14 mb-6 text-center">
-                <div className="text-lg min-[400px]:text-xl sm:text-2xl md:text-3xl lg:text-5xl text-orange-600 font-extrabold">
+            <div className="w-11/12 sm:w-10/12 mx-auto flex flex-col items-center gap-4 mt-8 sm:mt-11 md:mt-14 mb-6 text-center">
+                <div className="text-lg min-[300px]:text-xl min-[400px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-rose-400 font-extrabold">
                     <Typewriter words={["Upcoming Games"]} typeSpeed={75} cursor={true} delaySpeed={1000} deleteSpeed={25} loop={0} />
                 </div>
-                <p>Be excited as these mind blowing games are waiting to be released in the near future!
+                <p className="text-xs min-[400px]:text-sm sm:text-base">
+                    Be excited as these mind blowing games are waiting to be released in the near future!
                     Check these out.
                 </p>
             </div>
-            <div className="w-11/12 md:w-10/12 mx-auto h-[70vh] mb-14">
+            <div className="w-11/12 md:w-10/12 mx-auto sm:h-[70vh] mb-14">
                 <div className="carousel w-full h-[70vh]">
                     <div id="slide1" className="carousel-item relative w-full">
                         <img

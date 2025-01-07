@@ -2,8 +2,8 @@
 
 const ToggleTheme = () => {
     return (
-        <div className="flex justify-end my-4">
-            <label className="flex cursor-pointer gap-2 mr-8">
+        <div className="w-11/12 lg:w-10/12 mx-auto flex justify-end my-4">
+            <label className="flex cursor-pointer gap-2">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"

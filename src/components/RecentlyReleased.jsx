@@ -5,16 +5,16 @@ import recent3 from "../assets/legacy-of-kain.jpg";
 const RecentlyReleased = () => {
     return (
         <>
-            <div className="w-11/12 sm:w-10/12 mx-auto flex flex-col items-center gap-4 mt-14 mb-6 text-center">
-                <h2 className="text-lg min-[400px]:text-xl sm:text-2xl md:text-3xl lg:text-5xl text-rose-400 font-extrabold">
+            <div className="w-11/12 sm:w-10/12 mx-auto flex flex-col items-center gap-4 mt-8 sm:mt-11 md:mt-14 mb-6 text-center">
+                <h2 className="text-lg min-[300px]:text-xl min-[400px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-orange-600 font-extrabold">
                     Recently Released
                 </h2>
-                <p>
+                <p className="text-xs min-[400px]:text-sm sm:text-base">
                     These are the latest Games released within last two weeks. Check out reviews, play and give
                     your own opinion!
                 </p>
             </div>
-            <div className="w-11/12 md:w-10/12 mx-auto h-[70vh]">
+            <div className="w-11/12 md:w-10/12 mx-auto sm:h-[70vh]">
                 <div className="carousel w-full h-[70vh]">
                     <div id="slide1" className="carousel-item relative w-full">
                         <img
