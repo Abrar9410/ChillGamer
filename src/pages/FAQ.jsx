@@ -39,7 +39,7 @@ const FAQ = () => {
             </div>
             <div className="collapse collapse-arrow bg-rose-100">
                 <input type="radio" name="my-accordion-2" />
-                <div className="collapse-title text-xl text-red-800 font-medium">How is the ChillGamer rating determined?</div>
+                <div className="collapse-title text-xl text-red-800 font-medium">I have bound a bug or factual error. How can I report it?</div>
                 <div className="collapse-content">
                     <p className="text-black">
                         If you've found a bug or believe to have found a factual error, please email us from the
