@@ -115,7 +115,7 @@ const Register = () => {
                     </div>
                     <div className="form-control gap-4 mt-4 items-center">
                         <p className="text-red-600">{errorMessage}</p>
-                        <button className="btn btn-primary w-full">Register</button>
+                        <button className="btn bg-gradient-to-r from-red-800 via-orange-700 to-rose-400 text-white font-bold hover:scale-105 w-full">Register</button>
                         <p className="text-center">Already Have an Account? <Link to="/login" className="text-blue-500">Login</Link></p>
                         <p onClick={handleGoogleLogin} className="cursor-pointer hover:scale-105 py-1 px-2 rounded-lg flex justify-center items-center gap-1 bg-[#575757] text-white w-max">
                             <img src={googleLogo} className="w-3 h-3" alt="Google-logo" />
