@@ -1,6 +1,6 @@
-# **Chill Gamer: A Game Review Application**
+# **ChillGamer: A Game Review Application**
 
-This project, Chill Gamer, is a user-friendly game review application. The goal of this project is to design a platform where users can explore and share game reviews. Key features such as user authentication and review management are implemented to enhance the user experience. The application has a clean and responsive UI, focused on simplicity and functionality to provide a "chill" experience.  
+This project, ChillGamer, is a user-friendly game review application. The goal of this project is to design a platform where users can explore and share game reviews. Key features such as user authentication and review management are implemented to enhance the user experience. The application has a clean and responsive UI, focused on simplicity and functionality to provide a "chill" experience.  
 
 
 ## **Technologies used:**
