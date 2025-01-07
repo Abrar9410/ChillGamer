@@ -34,9 +34,9 @@ const HighestRatedGames = () => {
                 <div className="w-11/12 md:w-10/12 mx-auto grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {
                         highestRatedGames?.map(game =>
-                            <div key={game.title} className="rounded-lg pb-3 border-2 border-red-700 relative flex flex-col items-center gap-2">
+                            <div key={game.title} className="rounded-xl pb-3 border-2 border-red-700 relative flex flex-col items-center gap-2">
                                 <div className="rounded-lg">
-                                    <img src={game.coverImg} alt="Game_IMG" className="w-full rounded-t-lg"/>
+                                    <img src={game.coverImg} alt="Game_IMG" className="w-full rounded-t-xl"/>
                                 </div>
                                 <p className="text-red-700 text-lg sm:text-xl font-bold">{game.title}</p>
                                 <div

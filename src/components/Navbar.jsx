@@ -49,9 +49,11 @@ const Navbar = () => {
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-max p-2 shadow">
                                 <li><NavLink to="/">Home</NavLink></li>
                                 <li><NavLink to="/allReviews">All Reviews</NavLink></li>                                
+                                <li><NavLink to="/about-dev">About Dev</NavLink></li>                                
+                                <li><NavLink to="/faq">FAQ</NavLink></li>                                
                                 {user && <li><NavLink to="/addReview">Add Review</NavLink></li>}
                                 {user && <li><NavLink to="/myReviews">My Reviews</NavLink></li>}
                                 {user && <li><NavLink to="/watchList">Watchlist</NavLink></li>}
@@ -59,13 +61,15 @@ const Navbar = () => {
                         </div>
                         <Link to="/" className="flex items-center gap-1">
                             <img className="w-4 sm:w-6 md:w-8" src={logo} alt="logo" />
-                            <p className="sm:text-lg md:text-xl font-semibold text-yellow-400">Chill Gamer</p>
+                            <p className="sm:text-lg md:text-xl font-semibold text-yellow-400">ChillGamer</p>
                         </Link>
                         {
                             location.pathname === "/login" || location.pathname === "/register" ? <div></div> :
-                                <div className="hidden md:flex justify-center items-center gap-4 bg-black text-white max-lg:text-sm px-2 py-1 rounded-md md:ml-4 lg:ml-10">
+                                <div className="hidden md:flex justify-center items-center gap-2 min-[800px]:gap-3 min-[1080px]:gap-4 bg-black text-white max-lg:text-sm px-2 py-1 rounded-md md:ml-2 min-[800px]:ml-3 min-[820px]:ml-4 lg:ml-6 xl:ml-10">
                                     <NavLink to="/" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Home</NavLink>
                                     <NavLink to="/allReviews" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>All Reviews</NavLink>                                    
+                                    <NavLink to="/about-dev" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>About Dev</NavLink>                                    
+                                    <NavLink to="/faq" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>FAQ</NavLink>                                    
                                     {user && <NavLink to="/addReview" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Add Review</NavLink>}
                                     {user && <NavLink to="/myReviews" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>My Reviews</NavLink>}
                                     {user && <NavLink to="/watchList" className={({ isActive }) => isActive ? "text-red-500" : "hover:scale-105"}>Watchlist</NavLink>}
@@ -79,7 +83,7 @@ const Navbar = () => {
                     }
                     {
                         location.pathname === "/login" || location.pathname === "/register" ||
-                        <div className="flex max-[270px]:flex-col justify-end items-center max-[290px]:gap-1 gap-2">
+                        <div className="flex max-[270px]:flex-col justify-end items-center max-[290px]:gap-1 gap-2 md:gap-1 min-[840px]:gap-2 lg:gap-2">
                             {user &&
                                 <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border">
                                     <img className="w-full h-full rounded-full" src={user.photoURL} alt="user_IMG" data-tooltip-id="name-tooltip" data-tooltip-content={user.displayName} />
@@ -87,7 +91,7 @@ const Navbar = () => {
                                 </div>}
                             {
                                 user ?
-                                    <button onClick={handleLogOut} className="outline-none max-[350px]:p-1 px-3 py-2 rounded-lg text-xs sm:text-sm md:text-base font-semibold bg-black text-red-500 hover:scale-105 shadow-md">Log Out</button>
+                                    <button onClick={handleLogOut} className="outline-none max-[350px]:p-1 px-3 py-2 md:p-1 min-[840px]:px-2 min-[840px]:py-1 lg:px-3 lg:py-2 rounded-lg text-xs sm:text-sm min-[840px]:text-base lg:text-base font-semibold bg-black text-red-500 hover:scale-105 shadow-md">Log Out</button>
                                     : <button onClick={() => navigate("/login")} className="outline-none max-[350px]:p-1 px-3 py-2 rounded-lg text-xs sm:text-sm md:text-base font-semibold bg-black text-red-500 hover:scale-105 shadow-md">Log In</button>
                             }
                             {!user && <button onClick={() => navigate("/register")} className="outline-none max-[350px]:p-1 px-3 py-2 rounded-lg text-xs sm:text-sm md:text-base font-semibold bg-black text-red-500 hover:scale-105 shadow-md">Register</button>}

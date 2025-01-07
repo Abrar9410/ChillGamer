@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <div className="bg-[#575757] p-8">
+        <div className="bg-[#575757] p-8 mt-8 sm:mt-11 md:mt-14">
             <div className="flex flex-col items-center">
                 <img className="w-4 sm:w-6 md:w-8" src={logo} alt="logo" />
                 <p className="text-yellow-600 text-xl md:text-2xl font-bold">Chill Gamer</p>

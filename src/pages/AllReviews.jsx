@@ -54,7 +54,7 @@ const AllReviews = () => {
     return (
         <div>
             <div className="flex flex-col items-center gap-4 text-center bg-gradient-to-r from-red-800 via-orange-700 to-rose-400 py-12 px-2">
-                <h2 className="max-w-[90vw] text-black text-lg min-[400px]:text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold">All Reviews<br/>From Our Users</h2>
+                <h2 className="max-w-[90vw] text-black text-lg min-[400px]:text-xl sm:text-2xl md:text-3xl lg:text-5xl font-extrabold">All Reviews from<br />Our Users</h2>
                 <p className="max-w-[90vw] text-black/85 font-semibold">Here is the collection of all the reviews from our expert critics. Check out the reviews and gain in-depth knowledge about a particular game.
                     <br/>Happy Gaming!!
                 </p>
