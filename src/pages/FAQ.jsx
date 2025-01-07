@@ -39,6 +39,19 @@ const FAQ = () => {
             </div>
             <div className="collapse collapse-arrow bg-rose-100">
                 <input type="radio" name="my-accordion-2" />
+                <div className="collapse-title text-xl text-red-800 font-medium">How is the ChillGamer rating determined?</div>
+                <div className="collapse-content">
+                    <p className="text-black">
+                        If you've found a bug or believe to have found a factual error, please email us from the
+                        "contact" page. You will find the "Contact Us" option from the Footer section of our site.
+                        Please try to include as much information as possible, including your device and browser.
+                        Our team will respond as quickly as possible and we will provide you the updates
+                        regarding your message.
+                    </p>
+                </div>
+            </div>
+            <div className="collapse collapse-arrow bg-rose-100">
+                <input type="radio" name="my-accordion-2" />
                 <div className="collapse-title text-xl text-red-800 font-medium">How can I support ChillGamer?</div>
                 <div className="collapse-content">
                     <p className="text-black">
