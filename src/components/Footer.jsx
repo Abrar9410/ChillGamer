@@ -12,15 +12,16 @@ const Footer = () => {
             <hr className="my-4 sm:my-8"/>
             <div className="sm: md: lg:w-2/3 mx-auto grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-0">
                 <p className="text-white text-center sm:text-start sm:pt-6">
-                    The best Game review site. We have the best critics
+                    The best Game review site. We have the best critics. Join us, explore games, give reviews
+                    and enjoy gaming!
                 </p>
                 <div className="text-center">
                     <h6 className="text-white text-lg font-bold pb-2 sm:pb-4">Company</h6>
                     <ul className="text-white/70 font-light">
-                        <Link className="hover:underline"><li>About Us</li></Link>
-                        <Link className="hover:underline"><li>Contact Us</li></Link>
-                        <Link className="hover:underline"><li>Careers</li></Link>
-                        <Link className="hover:underline"><li>Advertisement</li></Link>
+                        <Link to="/about-dev" className="hover:underline"><li>About Dev</li></Link>
+                        <Link to="/contact" className="hover:underline"><li>Contact Us</li></Link>
+                        <Link to="/contact" className="hover:underline"><li>Careers</li></Link>
+                        <Link to="/contact" className="hover:underline"><li>Advertisement</li></Link>
                     </ul>
                 </div>
                 <div className="text-center">

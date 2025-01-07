@@ -13,6 +13,7 @@ import ReviewDetails from "../pages/ReviewDetails";
 import GameDetails from "../pages/GameDetails";
 import FAQ from "../pages/FAQ";
 import AboutDev from "../pages/AboutDev";
+import Contact from "../pages/Contact";
 
 
 const Router = createBrowserRouter([
@@ -67,6 +68,10 @@ const Router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register></Register>
+            },
+            {
+                path: "/contact",
+                element: <Contact></Contact>
             },
         ]
     },
