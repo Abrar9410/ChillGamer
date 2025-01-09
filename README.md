@@ -27,5 +27,5 @@ This project, ChillGamer, is a user-friendly game review application. The goal o
    * User must be logged in to provide reviews and navigating private routes.
 
 
-[Live Link](https://chill-gamer-ultimate-game-review-site.netlify.app/)
+[Live Link](https://assignment-10-chill-gamer.netlify.app/)
 
