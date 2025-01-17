@@ -14,6 +14,9 @@ import GameDetails from "../pages/GameDetails";
 import FAQ from "../pages/FAQ";
 import AboutDev from "../pages/AboutDev";
 import Contact from "../pages/Contact";
+import TermsOfService from "../pages/TermsOfService";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import CookiePolicy from "../pages/CookiePolicy";
 
 
 const Router = createBrowserRouter([
@@ -72,6 +75,18 @@ const Router = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact></Contact>
+            },
+            {
+                path: "/terms-of-service",
+                element: <TermsOfService></TermsOfService>
+            },
+            {
+                path: "/privacy-policy",
+                element: <PrivacyPolicy></PrivacyPolicy>
+            },
+            {
+                path: "/cookie-policy",
+                element: <CookiePolicy></CookiePolicy>
             },
         ]
     },

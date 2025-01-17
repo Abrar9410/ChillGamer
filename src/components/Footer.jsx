@@ -27,9 +27,9 @@ const Footer = () => {
                 <div className="text-center">
                     <h6 className="text-white text-lg font-bold pb-2 sm:pb-4">Legal</h6>
                     <ul className="text-white/70 font-light">
-                        <Link className="hover:underline"><li>Terms of Service</li></Link>
-                        <Link className="hover:underline"><li>Privacy Policy</li></Link>
-                        <Link className="hover:underline"><li>Cookie Policy</li></Link>
+                        <Link to="/terms-of-service" className="hover:underline"><li>Terms of Service</li></Link>
+                        <Link to="/privacy-policy" className="hover:underline"><li>Privacy Policy</li></Link>
+                        <Link to="/cookie-policy" className="hover:underline"><li>Cookie Policy</li></Link>
                     </ul>
                 </div>
             </div>
